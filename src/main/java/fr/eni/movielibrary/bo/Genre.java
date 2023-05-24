@@ -1,24 +1,25 @@
 package fr.eni.movielibrary.bo;
 
 public class Genre {
-    private int id;
+    private Long id;
     private String label;
 
     // Constructeurs
     public Genre() {
     }
 
-    public Genre(String label) {
+    public Genre(Long id, String label) {
+        this.id = id;
         this.label = label;
     }
 
 
     // Getters & Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

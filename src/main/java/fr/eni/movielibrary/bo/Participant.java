@@ -1,15 +1,14 @@
 package fr.eni.movielibrary.bo;
 
 public class Participant {
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
 
     // Constructeurs
-    public Participant() {
-    }
 
-    public Participant(String firstName, String lastName) {
+    public Participant(long id,String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
