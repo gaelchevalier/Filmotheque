@@ -30,4 +30,13 @@ public class Genre {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Genre{");
+        sb.append("id=").append(id);
+        sb.append(", label='").append(label).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

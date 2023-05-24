@@ -90,4 +90,19 @@ public class Movie {
     public void setActors(List<Participant> actors) {
         this.actors = actors;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", duration=" + duration +
+                ", synopsis='" + synopsis + '\'' +
+                ", genre=" + genre +
+                ", director=" + director +
+                ", actors=" + actors +
+                '}';
+    }
+
 }

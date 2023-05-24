@@ -58,4 +58,16 @@ public class Opinion {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Opinion{");
+        sb.append("id=").append(id);
+        sb.append(", note=").append(note);
+        sb.append(", comment='").append(comment).append('\'');
+        sb.append(", member=").append(member);
+        sb.append(", movie=").append(movie);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -70,4 +70,17 @@ public class Member {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Member{");
+        sb.append("id=").append(id);
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", isAdmin=").append(isAdmin);
+        sb.append('}');
+        return sb.toString();
+    }
 }
