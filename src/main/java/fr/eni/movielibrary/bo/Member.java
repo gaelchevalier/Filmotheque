@@ -1,7 +1,7 @@
 package fr.eni.movielibrary.bo;
 
 public class Member {
-    private Long id;
+    private long id;
     private String lastName;
     private String firstName;
     private String login;
@@ -12,7 +12,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(Long id, String lastName, String firstName, String login, String password, boolean isAdmin) {
+    public Member(long id, String lastName, String firstName, String login, String password, boolean isAdmin) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -23,11 +23,11 @@ public class Member {
 
     // Getters & Setters
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

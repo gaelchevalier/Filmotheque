@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface MovieService {
 
-    List<Movie> getAllMovies();
-    Movie getMovieById(long id);
-    List<Genre> getGenres();
-    List<Participant> getParticipants();
-    Genre getGenreById(long id);
-    Participant getParticipantById(long id);
-    void saveMovie(Movie movie);
+    public List<Movie> getAllMovies();
+    public Movie getMovieById(long id);
+    public List<Genre> getGenres();
+    public List<Participant> getParticipants();
+    public Genre getGenreById(long id);
+    public Participant getParticipantById(long id);
+    public void saveMovie(Movie movie);
 }
 

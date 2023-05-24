@@ -1,7 +1,7 @@
 package fr.eni.movielibrary.bo;
 
 public class Opinion {
-    private Long id;
+    private long id;
     private int note;
     private String comment;
 
@@ -11,7 +11,7 @@ public class Opinion {
     // Constructeurs
     public Opinion() {
     }
-    public Opinion(Long id, int note, String comment) {
+    public Opinion(long id, int note, String comment) {
         this.id = id;
         this.note = note;
         this.comment = comment;
@@ -19,11 +19,11 @@ public class Opinion {
 
     // Getters & Setters
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

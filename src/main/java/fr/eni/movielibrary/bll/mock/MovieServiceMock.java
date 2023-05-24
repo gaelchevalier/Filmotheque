@@ -26,7 +26,7 @@ public class MovieServiceMock implements MovieService {
         // Création de la liste des genres
         lstGenres = new ArrayList<>();
         for (int index = 0; index < genres.length; index++) {
-            lstGenres.add(new Genre((long) (index + 1), genres[index]));
+            lstGenres.add(new Genre(index + 1, genres[index]));
         }
 
         // Création de la liste des participants
