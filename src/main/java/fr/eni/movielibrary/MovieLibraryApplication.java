@@ -18,15 +18,15 @@ public class MovieLibraryApplication {
 
 		// Affichage du premier film
 		System.out.println("Le premier film est : ");
-		Movie firstMovie = movieBean.findMovie(1);
-		System.out.println(firstMovie);
+//		Movie firstMovie = movieBean.findMovie(1);
+//		System.out.println(firstMovie);
 
 		// Affichage de la liste des films
 		System.out.println("\nTous les films : ");
-		List<Movie> lstMovies = movieBean.showAllMovies();
-		for (Movie movie : lstMovies) {
-			System.out.println(movie);
-		}
+//		List<Movie> lstMovies = movieBean.showAllMovies();
+//		for (Movie movie : lstMovies) {
+//			System.out.println(movie);
+//		}
 	}
 
 }
