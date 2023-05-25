@@ -1,0 +1,135 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <title>Movie Details</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/static">Movie Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{'/'}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'/movie-list'}">Movie List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container text-center mt-4">
+        <h2>Film details</h2>
+
+        <div class="mt-4 row">
+            <form
+                class="col-6 offset-3"
+                action="/movie"
+                method="post"
+                th:object="${formMovie}"
+            >
+                <div class="mb-3 row">
+                    <label for="genre" class="form-label col-sm-2 col-form-label">Genre</label>
+                    <div class="col-sm-10">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="genre"
+                            th:field="${movie.genre.label}"
+                            placeholder="Genre"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="year" class="form-label col-sm-2 col-form-label">Year</label>
+                    <div class="col-sm-10">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="year"
+                            th:field="${movie.year}"
+                            placeholder="Year"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="title" class="form-label col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            th:field="${movie.title}"
+                            placeholder="Title"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="director" class="form-label col-sm-2 col-form-label">Director</label>
+                    <div class="col-sm-10">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="director"
+                            th:value="${movie.director.firstName + ' ' + movie.director.lastName}"
+                            placeholder="Title"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="duration" class="form-label col-sm-2 col-form-label">Duration</label>
+                    <div class="col-sm-10">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="duration"
+                            th:field="${movie.duration}"
+                            placeholder="Duration"
+                        >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="actors" class="form-label col-sm-2 col-form-label">Actors</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" multiple id="actors">
+                            <option th:each="actor : ${movie.actors}"
+                                    th:text="${actor.firstName + ' ' + actor.lastName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="synopsis" class="form-label col-sm-2 col-form-label">Synopsis</label>
+                    <div class="col-sm-10">
+                        <textarea
+                            class="form-control"
+                            id="synopsis"
+                            rows="3"
+                            th:field="${movie.synopsis}"
+                        >
+                        </textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark">Save</button>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

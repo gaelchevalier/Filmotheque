@@ -1,13 +1,13 @@
 package fr.eni.movielibrary.ihm;
 
 import fr.eni.movielibrary.bll.MovieService;
-import fr.eni.movielibrary.bo.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
-@Component("movieBean")
+@Controller
 public class MovieController {
 
     MovieService movieService;
@@ -17,11 +17,20 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    public Movie findMovie(long id){
-        return movieService.getMovieById(id);
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+    @GetMapping("/movie-list")
+    public String movieList(Model model) {
+        model.addAttribute("movies", movieService.getAllMovies());
+        return "movie/movie-list";
     }
 
-    public List<Movie> showAllMovies() {
-        return movieService.getAllMovies();
+    // Movie details
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable("id")long id, Model model) {
+        model.addAttribute("movie", movieService.getMovieById(id));
+        return "movie/movie-details";
     }
 }
