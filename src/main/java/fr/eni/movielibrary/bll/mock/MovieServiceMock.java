@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.movielibrary.bll.MovieService;
+import fr.eni.movielibrary.bll.ServiceResult;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -131,5 +132,27 @@ public class MovieServiceMock implements MovieService {
     @Override
     public void saveMovie(Movie movie) {
         lstMovies.add(movie);
+    }
+
+    @Override
+    public ServiceResult addMovie(Movie movie) {
+        // Preparer le resultat du traitement
+        ServiceResult result = new ServiceResult();
+
+        // Erreur : durée invalide
+        if (movie.getDuration() < 1) {
+            result.addError("La durée doit être supérieur à 0");
+        }
+        // Erreur : Synopsis invalide
+        if (!(movie.getSynopsis().length() >= 20 && movie.getSynopsis().length() <= 250)) {
+            result.addError("La Synopsis doit faire entre 20 et 250 caractères");
+        }
+
+        // Ajouter dans la liste le film
+        if (result.isValid()) {
+            lstMovies.add(movie);
+        }
+
+        return result;
     }
 }

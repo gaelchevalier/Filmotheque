@@ -11,8 +11,9 @@
           <div class="card-body">
             <h5 class="card-title" th:text="${movie.title}"></h5>
             <p class="card-text" th:text="${movie.year}"></p>
-            <p class="card-text" th:text="${movie.director.firstName + ' ' + movie.director.lastName}"></p>
-            <p class="card-text" th:text="${movie.genre.label}"></p>
+<!--            th:if temporaire-->
+            <p th:if="${movie.director}" class="card-text" th:text="${movie.director.firstName + ' ' + movie.director.lastName}"></p>
+            <p th:if="${movie.genre}" class="card-text" th:text="${movie.genre.label}"></p>
             <a th:href="@{'/details/' + ${movie.id}}" class="btn btn-dark">Details</a>
           </div>
         </div>

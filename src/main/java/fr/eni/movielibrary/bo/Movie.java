@@ -25,6 +25,14 @@ public class Movie {
         this.duration = duration;
         this.synopsis = synopsis;
     }
+    public Movie(long id, String title, int year, int duration, Genre genre, String synopsis) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.duration = duration;
+        this.genre = genre;
+        this.synopsis = synopsis;
+    }
 
     // Getters and Setters
     public long getId() {
