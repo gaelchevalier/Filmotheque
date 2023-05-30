@@ -10,6 +10,8 @@ public class Member {
 
     // Constructeurs
     public Member() {
+        login = "";
+        password = "";
     }
 
     public Member(long id, String lastName, String firstName, String login, String password, boolean isAdmin) {
