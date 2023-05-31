@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.eni.movielibrary.bll.MovieService;
 import fr.eni.movielibrary.bll.ServiceResult;
+import fr.eni.movielibrary.bo.Opinion;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,9 @@ public class MovieServiceMock implements MovieService {
         jurassicPark.setGenre(lstGenres.get(1));
         jurassicPark.setDirector(stevenSpielberg);
         jurassicPark.setActors(actorsJurassicPark);
+        // Opinions
+        jurassicPark.addOpinion(new Opinion(1, 4, "Cool les dinos grâce au clonage"));
+        jurassicPark.addOpinion(new Opinion(1, 4, "Pas mal mais sans plus"));
         lstMovies.add(jurassicPark);
 
         Movie theFly = new Movie(2, "The Fly", 1986, 95,
@@ -131,7 +135,21 @@ public class MovieServiceMock implements MovieService {
 
     @Override
     public void saveMovie(Movie movie) {
-        lstMovies.add(movie);
+        // Chercher l'index
+        int index = 0;
+        int indexToEdit = -1;
+        for (Movie currentMovie : lstMovies) {
+            // Si le slug correspond à la personne renseigné
+            if (currentMovie.getId() == movie.getId()) {
+                indexToEdit = index;
+            }
+            index++;
+        }
+
+        // Modifier depuis l'index
+        if (indexToEdit > -1) {
+            lstMovies.set(indexToEdit, movie);
+        }
     }
 
     @Override
@@ -151,6 +169,27 @@ public class MovieServiceMock implements MovieService {
         // Ajouter dans la liste le film
         if (result.isValid()) {
             lstMovies.add(movie);
+        }
+
+        return result;
+    }
+
+    @Override
+    public ServiceResult addOpinion(Opinion opinion, long movieId) {
+        ServiceResult result = new ServiceResult();
+
+        // Récupérer
+        Movie movie = getMovieById(movieId);
+
+        // Si on trouve le film
+        if (movie != null) {
+            // Ajouter la review
+            movie.addOpinion(opinion);
+
+            // Sauvegarder le film
+            saveMovie(movie);
+        } else {
+            result.addError("Le film n'existe pas");
         }
 
         return result;

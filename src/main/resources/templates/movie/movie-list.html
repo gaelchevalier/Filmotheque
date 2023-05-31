@@ -15,6 +15,7 @@
             <p th:if="${movie.director}" class="card-text" th:text="${movie.director.firstName + ' ' + movie.director.lastName}"></p>
             <p th:if="${movie.genre}" class="card-text" th:text="${movie.genre.label}"></p>
             <a th:href="@{'/details/' + ${movie.id}}" class="btn btn-dark">Details</a>
+            <a th:href="@{'/add-opinion/' + ${movie.id}}" class="btn btn-outline-dark">Opinion</a>
           </div>
         </div>
       </div>

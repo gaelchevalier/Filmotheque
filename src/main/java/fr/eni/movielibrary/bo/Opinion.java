@@ -1,8 +1,20 @@
 package fr.eni.movielibrary.bo;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Opinion {
     private long id;
+
+    @NotBlank
+    @Min(0)
+    @Max(5)
     private int note;
+
+    @NotBlank
+    @Size(min = 1, max = 250)
     private String comment;
 
     private Member member;

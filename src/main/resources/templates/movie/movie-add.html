@@ -8,10 +8,11 @@
 
         <div class="mt-4 row">
             <form
-                    class="col-6 offset-3"
-                    action="/add-movie"
-                    method="post"
-                    th:object="${movie}"
+                class="col-6 offset-3 needs-validation"
+                action="/add-movie"
+                method="post"
+                th:object="${movie}"
+                novalidate
             >
                 <!-- Affichage erreur -->
                 <div th:if="${errors != null && errors.size() > 0}" class="alert alert-danger" role="alert">
@@ -24,13 +25,19 @@
                     <label for="title" class="form-label col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
                         <input
-                                type="text"
-                                class="form-control"
-                                id="title"
-                                th:field="${movie.title}"
-                                placeholder="Title"
-                                required
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            th:field="${movie.title}"
+                            placeholder="Title"
+                            required
                         >
+                        <!-- Affichage erreurs -->
+                        <div th:if="${#fields.hasErrors('title')}"
+                             class="text-danger text-start">
+                            <p th:each="error : ${#fields.errors('title')}"
+                               th:text="${error}"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -45,6 +52,10 @@
                                 placeholder="Year"
                                 required
                         >
+                        <!-- Affichage erreurs -->
+                        <div th:if="${#fields.hasErrors('year')}" class="text-danger text-start">
+                            <p th:each="error : ${#fields.errors('year')}" th:text="${error}"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -52,6 +63,7 @@
                     <div class="col-sm-10">
                         <select id="director" class="form-select" aria-label="Select genres"
                                 th:field="${movie.director}"
+                                required
                         >
                             <option th:each="director : ${participantsOptions}" th:value="${director.id}"
                                     th:text="${director.lastName + ' ' + director.firstName}"></option>
@@ -67,7 +79,12 @@
                                 id="duration"
                                 th:field="${movie.duration}"
                                 placeholder="Duration"
+                                min="1"
                         >
+                        <!-- Affichage erreurs -->
+                        <div th:if="${#fields.hasErrors('duration')}" class="text-danger text-start">
+                            <p th:each="error : ${#fields.errors('duration')}" th:text="${error}"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -75,6 +92,7 @@
                     <div class="col-sm-10">
                         <select id="genre" class="form-select" aria-label="Select genres"
                                 th:field="${movie.genre}"
+                                required
                         >
                             <option th:each="genre : ${genresOptions}" th:value="${genre.id}" th:text="${genre.label}"></option>
                         </select>
@@ -90,6 +108,10 @@
                                 th:field="${movie.synopsis}"
                         >
                         </textarea>
+                        <!-- Affichage erreurs -->
+                        <div th:if="${#fields.hasErrors('synopsis')}" class="text-danger text-start">
+                            <p th:each="error : ${#fields.errors('synopsis')}" th:text="${error}"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -111,4 +133,24 @@
 </main>
 
 <div th:include="/includes/_footer"></div>
+<!--<script>-->
+<!--    (() => {-->
+<!--        'use strict'-->
+
+<!--        // Fetch all the forms we want to apply custom Bootstrap validation styles to-->
+<!--        const forms = document.querySelectorAll('.needs-validation')-->
+
+<!--        // Loop over them and prevent submission-->
+<!--        Array.from(forms).forEach(form => {-->
+<!--            form.addEventListener('submit', event => {-->
+<!--                if (!form.checkValidity()) {-->
+<!--                    event.preventDefault()-->
+<!--                    event.stopPropagation()-->
+<!--                }-->
+
+<!--                form.classList.add('was-validated')-->
+<!--            }, false)-->
+<!--        })-->
+<!--    })()-->
+<!--</script>-->
 </html>

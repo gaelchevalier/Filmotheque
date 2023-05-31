@@ -1,21 +1,40 @@
 package fr.eni.movielibrary.bo;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
     private long id;
+
+    @NotBlank
     private String title;
+
+    @Min(value = 1)
     private int year;
+
+    @Min(value = 1)
     private int duration;
+
+    @NotBlank
+    @Size(min = 20, max = 250)
     private String synopsis;
 
+
     private Genre genre;
+
+    private List<Opinion> opinions;
+
 
     private Participant director;
     private List<Participant> actors;
 
     // Constructeur
     public Movie() {
+        opinions = new ArrayList<Opinion>();
     }
 
     public Movie(long id, String title, int year, int duration, String synopsis) {
@@ -24,6 +43,7 @@ public class Movie {
         this.year = year;
         this.duration = duration;
         this.synopsis = synopsis;
+        opinions = new ArrayList<Opinion>();
     }
     public Movie(long id, String title, int year, int duration, Genre genre, String synopsis) {
         this.id = id;
@@ -32,6 +52,17 @@ public class Movie {
         this.duration = duration;
         this.genre = genre;
         this.synopsis = synopsis;
+    }
+
+    public Movie(long id, String title, int year, int duration, String synopsis, Genre genre, Participant director, List<Participant> actors) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.duration = duration;
+        this.synopsis = synopsis;
+        this.genre = genre;
+        this.director = director;
+        this.actors = actors;
     }
 
     // Getters and Setters
@@ -83,6 +114,14 @@ public class Movie {
         this.genre = genre;
     }
 
+    public List<Opinion> getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(List<Opinion> opinions) {
+        this.opinions = opinions;
+    }
+
     public Participant getDirector() {
         return director;
     }
@@ -97,6 +136,14 @@ public class Movie {
 
     public void setActors(List<Participant> actors) {
         this.actors = actors;
+    }
+
+    /**
+     * Add an opinion
+     * @param opinion
+     */
+    public void addOpinion(Opinion opinion) {
+        opinions.add(opinion);
     }
 
     @Override

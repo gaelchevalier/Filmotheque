@@ -3,101 +3,87 @@
 <div th:include="/includes/_header"></div>
 
 <main>
-    <div class="container text-center mt-4">
-        <h2>Movie details</h2>
+    <div class="container mt-4">
+        <h2 class="text-center" th:text="${movie.title}"></h2>
 
-        <div class="mt-4 row">
-            <form
-                class="col-6 offset-3"
-                action="/movie"
-                method="post"
-                th:object="${formMovie}"
-            >
-                <div class="mb-3 row">
-                    <label for="genre" class="form-label col-sm-2 col-form-label">Genre</label>
-                    <div class="col-sm-10">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="genre"
-                            th:field="${movie.genre.label}"
-                            placeholder="Genre"
-                        >
+        <div class="d-flex mt-4">
+            <div>
+                <img src="https://picsum.photos/300/450" alt="Film poster">
+            </div>
+            <div class="ms-3">
+                <p class="fw-light" th:text="${'Year : ' + movie.year}"></p>
+                <p th:text="${'Genre : ' + movie.genre.label}"></p>
+                <p th:text="${'Director : ' + movie.director.lastName + ' ' + movie.director.firstName}"></p>
+                <p th:text="${'Duration : ' + movie.duration}"></p>
+                <p th:text="${'Synopsis : ' + movie.synopsis}"></p>
+                <div>
+                    <h6>Actors</h6>
+                    <div class="d-flex gap-3">
+                        <div th:each="actor : ${movie.actors}" class="card" style="width: 10rem;">
+                            <img src="https://picsum.photos/100/100" class="card-img-top" alt="random image">
+                            <div class="card-body">
+                                <p class="card-title text-wrap" th:text="${actor.lastName + ' ' + actor.firstName}"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="year" class="form-label col-sm-2 col-form-label">Year</label>
-                    <div class="col-sm-10">
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="year"
-                            th:field="${movie.year}"
-                            placeholder="Year"
-                        >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="title" class="form-label col-sm-2 col-form-label">Title</label>
-                    <div class="col-sm-10">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="title"
-                            th:field="${movie.title}"
-                            placeholder="Title"
-                        >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="director" class="form-label col-sm-2 col-form-label">Director</label>
-                    <div class="col-sm-10">
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="director"
-                            th:value="${movie.director.firstName + ' ' + movie.director.lastName}"
-                            placeholder="Title"
-                        >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="duration" class="form-label col-sm-2 col-form-label">Duration</label>
-                    <div class="col-sm-10">
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="duration"
-                            th:field="${movie.duration}"
-                            placeholder="Duration"
-                        >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="actors" class="form-label col-sm-2 col-form-label">Actors</label>
-                    <div class="col-sm-10">
-                        <select class="form-select" multiple id="actors">
-                            <option th:each="actor : ${movie.actors}"
-                                    th:text="${actor.firstName + ' ' + actor.lastName}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="synopsis" class="form-label col-sm-2 col-form-label">Synopsis</label>
-                    <div class="col-sm-10">
-                        <textarea
-                            class="form-control"
-                            id="synopsis"
-                            rows="3"
-                            th:field="${movie.synopsis}"
-                        >
-                        </textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-dark">Save</button>
-            </form>
+            </div>
         </div>
+
+    <!-- Zone Opinion -->
+        <section class="mt-4">
+            <h2 class="text-center">Opinions</h2>
+            <!-- Formulaire add review -->
+            <div class="mt-4 row">
+                <form
+                    class="col-6 offset-3"
+                    th:action="@{'/add-new-opinion/'+ ${movie.id}}"
+                    method="post"
+                    th:object="${opinion}"
+                >
+
+                    <div class="mb-3 row">
+                        <label for="rating" class="form-label col-sm-2 col-form-label">Rating</label>
+                        <div class="col-sm-10">
+                            <input
+                                type="number"
+                                min="0"
+                                max="5"
+                                class="form-control"
+                                id="rating"
+                                th:field="${opinion.note}"
+                                required
+                            >
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="comment" class="form-label col-sm-2 col-form-label">Comment</label>
+                        <div class="col-sm-10">
+                            <textarea
+                                class="form-control"
+                                id="comment"
+                                rows="3"
+                                th:field="${opinion.comment}"
+                            >
+                            </textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Save</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <div>
+                <div th:each="opinion : ${movie.opinions}">
+                    <div  class="d-flex gap-2">
+                        <h5>Author</h5>
+                        <p th:text="${opinion.note + '/5'}"></p>
+                    </div>
+                    <p th:text="${opinion.comment}"></p>
+                </div>
+            </div>
+        </section>
 
     </div>
 </main>
