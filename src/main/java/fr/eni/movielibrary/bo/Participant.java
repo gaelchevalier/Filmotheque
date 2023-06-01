@@ -1,9 +1,19 @@
 package fr.eni.movielibrary.bo;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Participant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String lastName;
+
+    @ManyToMany(mappedBy = "actors")
+    List<Movie> actorMovies;
 
     // Constructeurs
 
@@ -11,6 +21,10 @@ public class Participant {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Participant() {
+
     }
 
     // Getters and Setters

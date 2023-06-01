@@ -1,23 +1,27 @@
 package fr.eni.movielibrary.bo;
 
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Opinion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
-    @Min(0)
-    @Max(5)
     private int note;
 
-    @NotBlank
-    @Size(min = 1, max = 250)
     private String comment;
 
+
+    @ManyToOne()
     private Member member;
+
+    @ManyToOne()
     private Movie movie;
 
     // Constructeurs

@@ -1,5 +1,8 @@
 package fr.eni.movielibrary.bo;
 
+import org.hibernate.annotations.ManyToAny;
+
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -7,7 +10,11 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
@@ -24,12 +31,17 @@ public class Movie {
     private String synopsis;
 
 
+    @ManyToOne()
     private Genre genre;
 
+    @OneToMany()
     private List<Opinion> opinions;
 
 
+    @ManyToOne()
     private Participant director;
+
+    @ManyToMany()
     private List<Participant> actors;
 
     // Constructeur
