@@ -13,8 +13,10 @@ public class Opinion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private int note;
 
+    @Column(nullable = false)
     private String comment;
 
 

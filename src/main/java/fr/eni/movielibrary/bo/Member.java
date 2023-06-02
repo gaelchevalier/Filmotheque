@@ -1,9 +1,7 @@
 package fr.eni.movielibrary.bo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -11,11 +9,25 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String login;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private boolean isAdmin;
+
+    @OneToMany()
+    @JoinColumn(name = "member_id")
+    private List<Opinion> opinions;
 
     // Constructeurs
     public Member() {
@@ -80,6 +92,14 @@ public class Member {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<Opinion> getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(List<Opinion> opinions) {
+        this.opinions = opinions;
     }
 
     @Override

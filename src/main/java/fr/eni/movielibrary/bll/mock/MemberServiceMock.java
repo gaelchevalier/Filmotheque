@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Profile("dev")
+@Profile("prod")
 public class MemberServiceMock implements MemberService {
     private static List<Member> lstMembers;
 
